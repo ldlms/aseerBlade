@@ -11,9 +11,9 @@
 </head>
     
 <div class="flex justify-center items-center h-screen">
-        <div class="bg-blue-400 p-8 rounded-lg  filter drop-shadow-xl w-full sm:w-1/2 lg:w-1/3">
-            <h2 class="text-2xl mb-6">Inscription</h2>
-            <form method="POST" action="{{ route('register') }}">
+        <div class="bg-green-400 p-8 rounded-lg  filter drop-shadow-xl w-full sm:w-1/2 lg:w-1/3">
+            <h2 class="text-2xl mb-6">Connexion</h2>
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
 
                 <div class="mb-4">
@@ -43,16 +43,15 @@
                     @enderror
                 </div>
 
-                <div class="mb-6">
-                    <label for="password_confirmation" class="block mb-2 font-semibold">Confirmation du mot de passe</label>
-                    <input id="password_confirmation" type="password" name="password_confirmation" required
-                           class="w-full border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
-                </div>
-
                 <div class="flex items-center">
                     <button type="submit" class="bg-white text-blue-500 rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                        S'inscrire
+                        Se connecter
                     </button>
+                </div>
+
+                <div class="flex items-center mb-4 my-4">
+                    <input id="remember" type="checkbox" name="remember" class="h-4 w-4 rounded border-gray-300 focus:ring-blue-500 text-blue-500">
+                    <label for="remember" class="ml-2 text-gray-700">Se rappeler de moi</label>
                 </div>
             </form>
         </div>

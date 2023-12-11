@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +23,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('components.auth.register');
+        return view('components.auth.login');
     }
 
     /**
@@ -32,24 +31,17 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password'=> 'required|confirmed|min:8',
+        $credentials = $request->only('email','password');
 
+        if(Auth::attempt($credentials,$request->filled('remember'))){
+            $request->session()->regenerate();
+
+            return redirect(RouteServiceProvider::HOME);
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.'
         ]);
-
-        // insert
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        Auth::login($user);
-        return redirect(RouteServiceProvider::HOME);
     }
 
     /**

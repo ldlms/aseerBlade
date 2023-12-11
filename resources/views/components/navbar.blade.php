@@ -1,8 +1,23 @@
 <!-- mobile -->
-<div class=" bg-blue-800 lg:hidden">
+<div class="{{ Auth::check() ? 'bg-green-800' : 'bg-blue-800' }} lg:hidden">
 <header class="text-center py-4">
     <img src="votre-logo.png" alt="Logo" class="mx-auto h-12">
+
+    @if (Auth::check())
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+        @csrf
+        @method('POST')
+    </form>
+    <h1 class="text-lg font-semibold">
+        <a href="{{ route('logout') }}" 
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+           class="text-white">
+            Bienvenue {{ Auth::user()->name }}
+        </a>
+    </h1>
+@else
     <h1 class="text-lg font-semibold">Nom du Site</h1>
+@endif
 </header>
 
 <!-- Menu burger pour mobile -->
@@ -23,10 +38,24 @@
 </div>
 
 <!-- desktop -->
-<div class=" bg-blue-800 hidden lg:block">
+<div class="{{ Auth::check() ? 'bg-green-800' : 'bg-blue-800' }} hidden lg:block">
 <header class="text-center py-4">
     <img src="votre-logo.png" alt="Logo" class="mx-auto h-12">
+    @if (Auth::check())
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+        @csrf
+        @method('POST')
+    </form>
+    <h1 class="text-lg font-semibold">
+        <a href="{{ route('logout') }}" 
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+           class="text-white">
+            Bienvenue {{ Auth::user()->name }}
+        </a>
+    </h1>
+@else
     <h1 class="text-lg font-semibold">A.S.E.E.R</h1>
+@endif
 </header>
 <nav class="flex justify-center items-center py-4 hidden lg:flex">
     <a href="#" class="text-white px-4">Menu 1</a>
