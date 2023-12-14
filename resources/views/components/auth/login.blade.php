@@ -53,6 +53,10 @@
                     <input id="remember" type="checkbox" name="remember" class="h-4 w-4 rounded border-gray-300 focus:ring-blue-500 text-blue-500">
                     <label for="remember" class="ml-2 text-gray-700">Se rappeler de moi</label>
                 </div>
+
+                <div class="flex items-center text-gray-700">
+                    <a href="{{ route('forget.password.get') }}"><p>Mot de passe oublié ?</p></a>
+                </div>
             </form>
         </div>
     </div>
